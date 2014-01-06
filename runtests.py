@@ -20,6 +20,14 @@ if not settings.configured:
     )
 
 
+# For Django 1.7.
+try:
+    import django
+    django.setup()
+except AttributeError:
+    pass
+
+
 from django.test.utils import get_runner
 
 
