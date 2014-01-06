@@ -6,17 +6,18 @@ class Constants(object):
 
     def __init__(self, **kwargs):
         self._constants = []
-        try:
-            for codename, (value, description) in kwargs.items():
-                if hasattr(self, codename):
-                    msg = "'{0}' conflicts with an existing attribute."
-                    raise Exception(msg.format(codename))
-                setattr(self, codename, value)
-                c = self.Constant(codename, value, description)
-                self._constants.append(c)
-        except (ValueError, TypeError):
-            raise Exception("Must pass in kwargs in format: "
-                            "**{'codename': (value, description)}")
+        for codename in kwargs:
+            try:
+                value, description = kwargs.get(codename)
+            except (ValueError, TypeError):
+                raise ValueError("Must pass in kwargs in format: "
+                                 "**{'codename': (value, description)}")
+            if hasattr(self, codename):
+                raise AttributeError("'{0}' conflicts with an existing "
+                                     "attribute.".format(codename))
+            setattr(self, codename, value)
+            c = self.Constant(codename, value, description)
+            self._constants.append(c)
 
     def choices(self):
         """Django-style choices list to pass to a model or form field."""
