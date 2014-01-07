@@ -4,6 +4,12 @@ django-constants
 django-constants provides a concise, consistent, and DRY way to define
 constants for Django model and form choice fields.
 
+:master: |master-status|
+
+.. |master_status| image::
+    https://api.travis-ci.org/caktus/django-constants.png?branch=master
+    :alt: Build Status
+    :target: https://travis-ci.org/caktus/django-constants
 
 Usage
 -----
