@@ -23,6 +23,19 @@ class TestConstants(SimpleTestCase):
                 C(codename='duplicate', value=2, description='Duplicated 2'),
             )
 
+    def test_initialization_formats(self):
+        """Constants can be initialized in multiple ways."""
+        constants = Constants(
+            C(codename="one", value=1, description="You can use **kwargs"),
+            C("two", 2, "You can use *args"),
+            C("three", 3, description="You can mix *args and **kwargs"),
+            ("four", 4, "You can use a 3-tuple"),
+            ["five", 5, "You can use an iterable of length 3"],
+        )
+        codenames = ["one", "two", "three", "four", "five"]
+        for value, codename in enumerate(codenames, start=1):
+            self.assertEquals(getattr(constants, codename), value)
+
     def test_get_choices(self):
         """
         get_choices() should return a choices list in Django's format, in the
