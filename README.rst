@@ -12,25 +12,26 @@ Usage
 
     from django import models
 
-    from constants import Constants
+    from constants import Constants, C
 
 
     class Foo(models.Model):
         STATUSES = Constants(
-            good=('0', 'In good condition'),
-            okay=('1', 'In okay condition'),
-            poor=('2', 'In poor condition'),
+            C(codename='good', value='0', description='In good condition'),
+            C(codename='okay', value='1', description='In okay condition'),
+            C(codename='poor', value='2', description='In poor condition'),
         )
 
         status = models.CharField(max_length=1, choices=STATUSES.choices(),
                                   default=STATUSES.good)
 
-Constants are passed to the initializer as keyword arguments. For each
-keyword argument, the keyword is a codename for the constant, and the value is
-a 2-tuple of the form `(value, description)` where the first element is the
-value of the constant and the second element is a human-readable description.
+Each constant passed to the initializer specifies a Pythonic codename, a
+value, and a human-friendly description. You may also pass in constants as a
+3-tuple of the format `(codename, value, description)`.
+
 To pass the constants to the `choices` argument of a field, use the
-`choices()` method of the `Constants` instance.
+`get_choices()` method of the `Constants` instance. Choices will be in the
+same order as the constants were passed into the initializer.
 
 Each codename is available directly on the `Constants` instance::
 
@@ -38,33 +39,34 @@ Each codename is available directly on the `Constants` instance::
     '0'
 
 Since the `Constants` class is only a wrapper, you can still use the built-in
-`Model.get_X_display` method::
+`Model.get_X_display` method as usual::
 
     >>> bar = Foo.objects.create(status=Foo.STATUSES.okay)
     >>> bar.get_status_display()
     'In okay condition'
 
-To get a sublist of constants, you can use the `get_list` method on a
+To get a sublist of constants, you can use the `get_values` method on a
 `Constants` instance. The following two lines of code are equivalent::
 
     >>> acceptable = Foo.objects.filter(status__in=[Foo.STATUSES.good, Foo.STATUSES.okay])
-    >>> acceptable = Foo.objects.filter(status__in=Foo.STATUSES.get_list('good', 'okay'))
+    >>> acceptable = Foo.objects.filter(status__in=Foo.STATUSES.get_values('good', 'okay'))
 
 `Constants` can be used for form fields as well::
 
     from django import forms
 
-    from constants import Constants
+    from constants import Constants, C
 
 
     class FavoriteForm(forms.Form):
         COLORS = Constants(
-            red=('r', 'Red'),
-            green=('g', 'Green'),
-            blue=('b', 'Blue'),
+            C(codename='red', value='r', description='Red'),
+            C(codename='green', value='g', description='Green'),
+            C(codename='blue', value='b', description='Blue'),
         )
 
-        favorite_color = forms.ChoiceField(choices=COLORS.choices())
+        favorite_color = forms.ChoiceField(choices=COLORS.get_choices(),
+                                           initial=COLORS.blue)
 
 
 Running the Tests
