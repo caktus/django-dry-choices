@@ -1,24 +1,15 @@
 language: python
-
 python:
   - "2.7"
-
 env:
+  - TOXENV=py33-trunk
+  - TOXENV=py33-1.6.X
+  - TOXENV=py33-1.5.X
+  - TOXENV=py27-trunk
+  - TOXENV=py26-1.6.X
+  - TOXENV=py26-1.5.X
   - TOXENV=py26-1.4.X
-  - TOXENV=py26-1.5.X,py32-1.5.X
-  - TOXENV=py26-1.6.X,py32-1.6.X
-  - TOXENV=py26-trunk,py32-trunk
-
 install:
-  - pip install tox --use-mirrors
-
+  - pip install -q --use-mirrors tox==1.6.1
 script:
-    - tox
-
-branches:
-  only:
-    - master
-
-matrix:
-  allow_failures:
-    - env: TOXENV=py26-trunk,py32-trunk
+  - tox
