@@ -16,7 +16,8 @@ class TestIsValidIdentifier(SimpleTestCase):
                       ", ".join("'{0}'".format(i) for i in invalids))
 
     def test_invalid_identifiers(self):
-        expected_invalids = ['hello world', '1hello', ' hello', 'hello,world']
+        expected_invalids = ['hello world', '1hello', ' hello', 'hello,world',
+                             'hello-world']
 
         valids = [identifier for identifier in expected_invalids
                   if utils.is_valid_identifier(identifier)]
