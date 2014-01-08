@@ -7,21 +7,21 @@ class TestChoices(TestCase):
 
     def test_invalid_codename(self):
         """Each codename must be a valid Python identifier."""
-        with self.assertRaises(AttributeError):
-            Choices(C(codename='9invalid', value=1, description='Invalid'))
+        args = [C(codename='9invalid', value=1, description='Invalid')]
+        self.assertRaises(AttributeError, Choices, *args)
 
     def test_conflicting_codename(self):
         """Codename cannot conflict with an existing attribute."""
-        with self.assertRaises(AttributeError):
-            Choices(C(codename='get_choices', value=1, description='Conflicting'))
+        args = [C(codename='get_choices', value=1, description='Conflicting')]
+        self.assertRaises(AttributeError, Choices, *args)
 
     def test_duplicate_codename(self):
         """Codenames cannot be duplicated."""
-        with self.assertRaises(AttributeError):
-            Choices(
-                C(codename='duplicate', value=1, description='Duplicated 1'),
-                C(codename='duplicate', value=2, description='Duplicated 2'),
-            )
+        args = [
+            C(codename='duplicate', value=1, description='Duplicated 1'),
+            C(codename='duplicate', value=2, description='Duplicated 2'),
+        ]
+        self.assertRaises(AttributeError, Choices, *args)
 
     def test_initialization_formats(self):
         """Choices can be initialized in multiple ways."""
@@ -66,5 +66,4 @@ class TestChoices(TestCase):
             C(codename='hello', value=1, description='First'),
             C(codename='world', value=2, description='Second'),
         )
-        with self.assertRaises(AttributeError):
-            self.assertEquals(choices.get_values('invalid'))
+        self.assertRaises(AttributeError, choices.get_values, 'invalid')
