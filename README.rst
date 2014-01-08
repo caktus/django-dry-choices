@@ -15,25 +15,27 @@ Usage
 ``Constants`` are defined as follows::
 
     from django import models
+    from django.utils.translation import ugettext_lazy as _
 
     from constants import Constants, C
 
 
     class Foo(models.Model):
         STATUSES = Constants(
-            C(codename='good', value='0', description='In good condition'),
-            C(codename='okay', value='1', description='In okay condition'),
-            C(codename='poor', value='2', description='In poor condition'),
+            C(codename='good', value='0', description=_('In good condition')),
+            C(codename='okay', value='1', description=_('In okay condition')),
+            C(codename='poor', value='2', description=_('In poor condition')),
         )
 
         status = models.CharField(max_length=1, choices=STATUSES.choices(),
                                   default=STATUSES.good)
 
 Each constant passed to the initializer specifies a Pythonic *codename*, a
-*value*, and a human-friendly *description*. django-constants supports defining
-constants in several different ways::
+*value*, and a human-friendly *description* (which may optionally be
+marked as a translation string). django-constants supports defining constants
+in several different ways::
 
-    Constants(
+    >>> Constants(
         C(codename="one", value=1, description="You can use C(**kwargs)"),
         C("two", 2, "You can use C(*args)"),
         C("three", 3, description="You can mix C(*args, **kwargs)"),
