@@ -1,10 +1,10 @@
-from django.test import SimpleTestCase
+from unittest import TestCase
 
 from .. import utils
 
 
-class TestIsValidIdentifier(SimpleTestCase):
-    """Tests for constants.utils.is_valid_identifier."""
+class TestIsValidIdentifier(TestCase):
+    """Tests for choices.utils.is_valid_identifier."""
 
     def test_valid_identifiers(self):
         expected_valids = ['_hello_', '__hello__', 'hello1', 'hello']

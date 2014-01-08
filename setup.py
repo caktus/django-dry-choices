@@ -13,20 +13,20 @@ def read_file(filename):
 
 
 setup(
-    name='django-constants',
-    version=__import__('constants').__version__,
+    name='django-choices',
+    version=__import__('choices').__version__,
     author='Caktus Consulting Group',
     author_email='solutions@caktusgroup.com',
     packages=find_packages(),
     include_package_data=True,
-    url='https://github.com/caktus/django-constants/',
+    url='https://github.com/caktus/django-choices/',
     license='BSD',
-    description=u' '.join(__import__('constants').__doc__.splitlines()).strip(),
+    description=u' '.join(__import__('choices').__doc__.splitlines()).strip(),
     classifiers=[
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',      
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.2',

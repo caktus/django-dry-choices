@@ -1,5 +1,5 @@
 include AUTHORS
 include LICENSE
 include README.rst
-recursive-include constants/static *
-recursive-include constants/templates *
+recursive-include choices/static *
+recursive-include choices/templates *

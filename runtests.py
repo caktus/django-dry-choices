@@ -13,7 +13,7 @@ if not settings.configured:
             }
         },
         INSTALLED_APPS=(
-            'constants',
+            'choices',
         ),
         SITE_ID=1,
         SECRET_KEY='this-is-just-for-tests-so-not-that-secret',
@@ -34,7 +34,7 @@ from django.test.utils import get_runner
 def runtests():
     TestRunner = get_runner(settings)
     test_runner = TestRunner(verbosity=1, interactive=True, failfast=False)
-    failures = test_runner.run_tests(['constants', ])
+    failures = test_runner.run_tests(['choices', ])
     sys.exit(failures)
 
 
