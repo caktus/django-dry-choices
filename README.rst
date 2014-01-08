@@ -12,7 +12,7 @@ constants for Django model and form choice fields.
 Usage
 -----
 
-`Constants` are defined as follows::
+``Constants`` are defined as follows::
 
     from django import models
 
@@ -29,33 +29,41 @@ Usage
         status = models.CharField(max_length=1, choices=STATUSES.choices(),
                                   default=STATUSES.good)
 
-Each constant passed to the initializer specifies a Pythonic codename, a
-value, and a human-friendly description. You may also pass in constants as a
-3-tuple of the format `(codename, value, description)`.
+Each constant passed to the initializer specifies a Pythonic *codename*, a
+*value*, and a human-friendly *description*. django-constants supports defining
+constants in several different ways::
 
-To pass the constants to the `choices` argument of a field, use the
-`get_choices()` method of the `Constants` instance. Choices will be in the
-same order as the constants were passed into the initializer.
+    Constants(
+        C(codename="one", value=1, description="You can use C(**kwargs)"),
+        C("two", 2, "You can use C(*args)"),
+        C("three", 3, description="You can mix C(*args, **kwargs)"),
+        ("four", 4, "You can use a 3-tuple"),
+        ["five", 5, "You can use any iterable of length 3"],
+    )
 
-Each codename is available directly on the `Constants` instance::
+To pass the constants to the ``choices`` argument of a Django model or form
+field, use the ``get_choices()`` method of the ``Constants`` instance. Choices
+will be in the same order as the constants were passed into the initializer.
+
+Each codename is available directly on the ``Constants`` instance::
 
     >>> Foo.STATUSES.good
     '0'
 
-Since the `Constants` class is only a wrapper, you can still use the built-in
-`Model.get_X_display` method as usual::
+Since the ``Constants`` class is only a wrapper, you can still use the
+built-in ``Model.get_X_display`` method as usual::
 
     >>> bar = Foo.objects.create(status=Foo.STATUSES.okay)
     >>> bar.get_status_display()
     'In okay condition'
 
-To get a sublist of constants, you can use the `get_values` method on a
-`Constants` instance. The following two lines of code are equivalent::
+To get a sublist of constants, you can use the ``get_values`` method on a
+``Constants`` instance. The following two lines of code are equivalent::
 
     >>> acceptable = Foo.objects.filter(status__in=[Foo.STATUSES.good, Foo.STATUSES.okay])
     >>> acceptable = Foo.objects.filter(status__in=Foo.STATUSES.get_values('good', 'okay'))
 
-`Constants` can be used for form fields as well::
+``Constants`` can be used for form fields as well::
 
     from django import forms
 
@@ -78,11 +86,11 @@ Running the Tests
 
 You can run the tests with via::
 
-    python setup.py test
+    >>> python setup.py test
 
 or::
 
-    python runtests.py
+    >>> python runtests.py
 
 
 License
