@@ -27,7 +27,7 @@ Usage
             C(codename='poor', value='2', description=_('In poor condition')),
         )
 
-        status = models.CharField(max_length=1, choices=STATUSES.choices(),
+        status = models.CharField(max_length=1, choices=STATUSES.get_choices(),
                                   default=STATUSES.good)
 
 Each choice passed to the initializer specifies a Pythonic *codename*, a
