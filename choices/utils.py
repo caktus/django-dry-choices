@@ -1,6 +1,9 @@
 import re
 
 
+__all__ = ['identifier_pattern', 'is_valid_identifier']
+
+
 identifier_pattern = re.compile("^[a-zA-Z_][\w]*$")
 
 

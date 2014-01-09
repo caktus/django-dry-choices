@@ -3,6 +3,9 @@ from collections import namedtuple
 from .utils import is_valid_identifier
 
 
+__all__ = ['C', 'Choices']
+
+
 # Encapsulates a single choice.
 C = namedtuple('Choice', ['codename', 'value', 'description'])
 
@@ -27,7 +30,7 @@ class Choices(object):
             if hasattr(self, item.codename):
                 raise AttributeError("The codename '{0}' conflicts with an "
                                      "existing attribute or is "
-                                     "duplicated".format(item.codename))
+                                     "duplicated.".format(item.codename))
             setattr(self, item.codename, item.value)
             self._choices.append(item)
 
