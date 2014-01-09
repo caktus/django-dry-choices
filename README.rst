@@ -96,6 +96,12 @@ or::
 If you are using Python 2.6, you will need to install `unittest2
 <https://pypi.python.org/pypi/unittest2>`_.
 
+To run the tests against multiple versions of Python, install `tox
+<https://pypi.python.org/pypi/tox>`_, move to the top directory of the repo,
+and run::
+
+    >>> tox
+
 License
 -------
 
