@@ -65,6 +65,12 @@ To get a sublist of choices, you can use the ``get_values`` method on a
     >>> acceptable = Foo.objects.filter(status__in=[Foo.STATUSES.good, Foo.STATUSES.okay])
     >>> acceptable = Foo.objects.filter(status__in=Foo.STATUSES.get_values('good', 'okay'))
 
+Iterating over the ``Choices`` instance iterates over the result of
+``get_choices()``::
+
+    >>> [choice for choice in Foo.STATUSES]
+    [(1, "In good condition"), (2, "In okay condition"), (3, "In poor condition")]
+
 ``Choices`` can be used for form fields as well::
 
     from django import forms

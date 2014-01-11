@@ -34,13 +34,17 @@ class Choices(object):
             setattr(self, item.codename, item.value)
             self._choices.append(item)
 
+    def __iter__(self):
+        for c in self._choices:
+            yield (c.value, c.description)
+
     def __repr__(self):
         clist = ', '.join(c.codename for c in self._choices)
         return u'Choices[{0}]'.format(clist)
 
     def get_choices(self):
         """Django-style choices list to pass to a model or form field."""
-        return [(c.value, c.description) for c in self._choices]
+        return [choice for choice in self]
 
     def get_values(self, *codenames):
         """Returns a list of values corresponding with the codenames."""

@@ -43,6 +43,12 @@ class TestChoices(TestCase):
         for value, codename in enumerate(codenames, start=1):
             self.assertEquals(getattr(choices, codename), value)
 
+    def test_iteration(self):
+        """Iteration is over the Django-style choices list."""
+        result = [choice for choice in self.choices]
+        expected = [(1, 'First'), (2, 'Second')]
+        self.assertEquals(result, expected)
+
     def test_repr(self):
         """Smoke test for string representation."""
         result = str(self.choices)
