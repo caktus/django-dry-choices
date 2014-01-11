@@ -1,12 +1,12 @@
-django-choices |build_status|
+django-dry-choices |build_status|
 ===============================
 
 .. |build_status| image::
-    https://travis-ci.org/caktus/django-choices.png?branch=master
+    https://travis-ci.org/caktus/django-dry-choices.png?branch=master
     :alt: Master build status
-    :target: https://travis-ci.org/caktus/django-choices
+    :target: https://travis-ci.org/caktus/django-dry-choices
 
-django-choices provides a concise, consistent, and DRY way to define
+django-dry-choices provides a concise, consistent, and DRY way to define
 choices for Django model and form choice fields.
 
 Usage
@@ -32,7 +32,7 @@ Usage
 
 Each choice passed to the initializer specifies a Pythonic *codename*, a
 *value*, and a human-friendly *description* (which may optionally be
-marked as a translation string). django-choices supports defining choices
+marked as a translation string). django-dry-choices supports defining choices
 in several different ways::
 
     >>> Choices(
@@ -105,16 +105,16 @@ and run::
 License
 -------
 
-django-choices is released under the BSD License. See the
-`LICENSE <https://github.com/caktus/django-choices/blob/master/LICENSE>`_
+django-dry-choices is released under the BSD License. See the
+`LICENSE <https://github.com/caktus/django-dry-choices/blob/master/LICENSE>`_
 file for more details.
 
 Contributing
 ------------
 
 If you think you've found a bug or are interested in contributing to this
-project check out `django-choices on Github
-<https://github.com/caktus/django-choices>`_.
+project check out `django-dry-choices on Github
+<https://github.com/caktus/django-dry-choices>`_.
 
 Development sponsored by `Caktus Consulting Group, LLC
 <http://www.caktusgroup.com/services>`_.

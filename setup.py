@@ -14,13 +14,13 @@ def read_file(filename):
 
 
 setup(
-    name='django-choices',
+    name='django-dry-choices',
     version=__import__('choices').__version__,
     author='Caktus Consulting Group',
     author_email='solutions@caktusgroup.com',
     packages=find_packages(),
     include_package_data=True,
-    url='https://github.com/caktus/django-choices/',
+    url='https://github.com/caktus/django-dry-choices/',
     license='BSD',
     description=u' '.join(__import__('choices').__doc__.splitlines()).strip(),
     classifiers=[
