@@ -5,6 +5,13 @@ from ..base import Choices, C
 
 class TestChoices(TestCase):
 
+    def setUp(self):
+        super(TestChoices, self).setUp()
+        self.choices = Choices(
+            C(codename='hello', value=1, description='First'),
+            C(codename='world', value=2, description='Second'),
+        )
+
     def test_invalid_codename(self):
         """Each codename must be a valid Python identifier."""
         args = [C(codename='9invalid', value=1, description='Invalid')]
@@ -36,34 +43,27 @@ class TestChoices(TestCase):
         for value, codename in enumerate(codenames, start=1):
             self.assertEquals(getattr(choices, codename), value)
 
+    def test_repr(self):
+        """Smoke test for string representation."""
+        result = str(self.choices)
+        expected = "Choices[hello, world]"
+        self.assertEquals(result, expected)
+
     def test_get_choices(self):
         """
         get_choices() should return a choices list in Django's format, in the
         order in which the choices were originally passed in.
         """
-        choices = Choices(
-            C(codename='hello', value=1, description='First'),
-            C(codename='world', value=2, description='Second'),
-        )
-        self.assertEquals(choices.get_choices(), [
-            (1, 'First'),
-            (2, 'Second'),
-        ])
-
-    def test_repr(self):
-        """Smoke test for string representation."""
-        str(Choices(C(codename='hello', value=1, description='Hello')))
+        result = self.choices.get_choices()
+        expected = [(1, 'First'), (2, 'Second')]
+        self.assertEquals(result, expected)
 
     def test_get_values(self):
-        choices = Choices(
-            C(codename='hello', value=1, description='First'),
-            C(codename='world', value=2, description='Second'),
-        )
-        self.assertEquals(choices.get_values('hello', 'world'), [1, 2])
+        """get_values() should return a list of values."""
+        result = self.choices.get_values('hello', 'world')
+        expected = [1, 2]
+        self.assertEquals(result, expected)
 
     def test_get_invalid_value(self):
-        choices = Choices(
-            C(codename='hello', value=1, description='First'),
-            C(codename='world', value=2, description='Second'),
-        )
-        self.assertRaises(AttributeError, choices.get_values, 'invalid')
+        """AttributeError should occur when accessing a non-existant choice."""
+        self.assertRaises(AttributeError, self.choices.get_values, 'invalid')
