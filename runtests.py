@@ -1,41 +1,20 @@
 #!/usr/bin/env python
-import sys
-
-from django.conf import settings
-
-
-if not settings.configured:
-    settings.configure(
-        DATABASES={
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': ':memory:',
-            }
-        },
-        INSTALLED_APPS=(
-            'choices',
-        ),
-        SITE_ID=1,
-        SECRET_KEY='this-is-just-for-tests-so-not-that-secret',
-    )
-
-
-# For Django 1.7.
+import os
 try:
-    import django
-    django.setup()
-except AttributeError:
-    pass
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 
-from django.test.utils import get_runner
+def get_suite():
+    setup_dir = os.path.abspath(os.path.dirname(__file__))
+    return unittest.defaultTestLoader.discover(setup_dir)
 
 
 def runtests():
-    TestRunner = get_runner(settings)
-    test_runner = TestRunner(verbosity=1, interactive=True, failfast=False)
-    failures = test_runner.run_tests(['choices', ])
-    sys.exit(failures)
+    suite = get_suite()
+    runner = unittest.TextTestRunner()
+    runner.run(suite)
 
 
 if __name__ == '__main__':

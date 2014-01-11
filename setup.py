@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from setuptools import setup, find_packages
 
@@ -36,6 +37,6 @@ setup(
         'Operating System :: OS Independent',
     ],
     long_description=read_file('README.rst'),
-    test_suite="runtests.runtests",
+    test_suite="runtests.get_suite",
     zip_safe=False,
 )

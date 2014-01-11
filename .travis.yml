@@ -2,13 +2,9 @@ language: python
 python:
   - "2.7"
 env:
-  - TOXENV=py33-trunk
-  - TOXENV=py33-1.6.X
-  - TOXENV=py33-1.5.X
-  - TOXENV=py27-trunk
-  - TOXENV=py26-1.6.X
-  - TOXENV=py26-1.5.X
-  - TOXENV=py26-1.4.X
+  - TOXENV=py33
+  - TOXENV=py27
+  - TOXENV=py26
 install:
   - pip install -q --use-mirrors tox==1.6.1
 script:

@@ -82,11 +82,10 @@ To get a sublist of choices, you can use the ``get_values`` method on a
         favorite_color = forms.ChoiceField(choices=COLORS.get_choices(),
                                            initial=COLORS.blue)
 
-
 Running the Tests
 -----------------
 
-You can run the tests with via::
+You can run the tests via::
 
     >>> python setup.py test
 
@@ -94,6 +93,14 @@ or::
 
     >>> python runtests.py
 
+If you are using Python 2.6, you will need to install `unittest2
+<https://pypi.python.org/pypi/unittest2>`_.
+
+To run the tests against multiple versions of Python, install `tox
+<https://pypi.python.org/pypi/tox>`_, move to the top directory of the repo,
+and run::
+
+    >>> tox
 
 License
 -------
@@ -101,7 +108,6 @@ License
 django-choices is released under the BSD License. See the
 `LICENSE <https://github.com/caktus/django-choices/blob/master/LICENSE>`_
 file for more details.
-
 
 Contributing
 ------------
