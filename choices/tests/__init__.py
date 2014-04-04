@@ -1,2 +1,2 @@
-from .test_choices import *
-from .test_utils import *
+from .test_choices import TestChoices  # NOQA
+from .test_utils import TestIsValidIdentifier  # NOQA
